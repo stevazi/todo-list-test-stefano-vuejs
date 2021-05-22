@@ -1,10 +1,25 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/">Home</router-link>  
+    <router-link to="/all" v-if="isUserSet()">| All | </router-link> 
+    <router-link to="/completed" v-if="isUserSet()">completed | </router-link> 
+    <router-link to="/toBeDone" v-if="isUserSet()">To be Done</router-link>
+
   </div>
   <router-view/>
 </template>
+
+<script>
+export default {
+  methods:{
+    isUserSet(){
+      if (this.$store.state.isUserSet){
+        return true
+      }
+    }
+  }
+}
+</script>
 
 <style>
 #app {
