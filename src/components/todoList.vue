@@ -6,18 +6,30 @@
 
 
         
-        <div class="input-div">
+        <div class="input-div" v-if="showInsertNew">
+            <h1>Add New</h1>
             <input type="text" class="input" v-model="newTodoTitle" @keyup.enter="createTodo()">
             <button @click="createTodo()"  >Save
             </button>
         </div>
 
-        <div v-for="todo, index in todosFiltered" :key="index" class="todo-item" >
-            <input v-if="showCheckbox" type="checkbox" :checked="isDoneCheck(todo)" @change="doneFunc(todo)">
-           <span v-if="!todo.isEditing" @click="editMode(todo)">{{todo.title}}</span> <input v-else type="text" @keyup.enter="saveChange(index, todo)" v-model="editTitle">
-           <div class="delete-item" @click="deleteItem(index)" >&times;</div><span>added by {{username(todo)}} </span><div v-if="isDoneCheck(todo)" class="completer">completed by {{usernameCompleter(todo)}} </div>
-        </div>
-        <div v-if="isViewLogout" class="logout" @click="logout">Logout</div>
+    <div v-for="todo, index in todosFiltered" :key="index" class="todo-item" >
+        <ul class="list-group">
+            <li class="list-group-item">
+                <input v-if="showCheckbox" type="checkbox" :checked="isDoneCheck(todo)" @change="doneFunc(todo)">
+                <span v-if="!todo.isEditing" @click="editMode(todo)">{{todo.title}}</span>
+                <input v-else type="text" @keyup.enter="saveChange(index, todo)" v-model="editTitle">
+
+                <span class="completer" v-if="isDoneCheck(todo)">                |       completed by {{usernameCompleter(todo)}}</span>
+                <span class="delete">             added by {{username(todo)}} </span>
+                
+                <span class="delete" @click="deleteItem(index)" >&times;</span>
+                
+            </li>
+        </ul>
+        
+    </div>
+    <div v-if="isViewLogout" class="logout" @click="logout">Logout</div>
     </div>
     
 </template>
@@ -26,7 +38,7 @@
 export default {
     data(){
         return {
-            'todosa': this.$store.state.todos,
+            
             'users':this.$store.state.users,
             'currentUserId': this.$store.state.currentUser,
             'newTodoTitle': '',
@@ -46,6 +58,10 @@ export default {
         },
         'isViewLogout':{
             type:Boolean,
+            required: true
+        },
+        'showInsertNew':{
+            type: Boolean,
             required: true
         }
     },
@@ -118,10 +134,12 @@ export default {
 </script>
 
 <style>
+
+
 .container{
     margin: 50px ;
-    margin-left: 33%;
-    margin-right: 33%;
+    margin-left:10%;
+    margin-right: 10%;
     width: auto;
     height: 1000px;
     align-items: center ;
@@ -158,4 +176,75 @@ button.input-div{
 .completer{
     text-align: right;
 }
+
+.user-item {
+  padding: 10px;
+  position: relative;
+}
+
+.user-item div.user-container {
+  text-align: left;
+  font: normal 14px sans-serif;
+  background-color: #f4f8fa;
+  border: 1px solid #dbe3e7;
+  box-shadow: 0 2px 3px #dbe3e7;
+  padding-right: 50px;
+  overflow: hidden;
+}
+
+.user-item a.user-avatar {
+  float: left;
+  padding: 10px 15px;
+}
+
+.user-item p.user-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 19px 0 0;
+}
+
+.user-item p.user-name a {
+  color: #5d6569;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.user-item p.user-name span {
+  display: block;
+  font-size: 11px;
+  color: #808d93;
+  padding-top: 4px;
+}
+
+.user-item a.user-delete {
+  background-color: #de4a4a;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 10px;
+  line-height: 23px;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  top: 0;
+  right: 0px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.checkbox {
+  margin-right: 20px;
+}
+
+.delete {
+  float: right;
+}
+.input{
+    margin-bottom: 20px;
+}
+
+ul.list-group {
+    list-style-type: none;
+}
+
 </style>

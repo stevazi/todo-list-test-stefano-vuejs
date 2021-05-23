@@ -11,7 +11,7 @@
 
         </div>
 
-        <todoList v-if="isUserSet" :todosFiltered="todosFiltered" @logoutEvent="logMeOut" :showCheckbox="showCheckbox" :isViewLogout="isViewLogout"></todoList>
+        <todoList v-if="isUserSet" :todosFiltered="todosFiltered" @logoutEvent="logMeOut" :showCheckbox="showCheckbox" :isViewLogout="isViewLogout" :showInsertNew="showInsertNew"></todoList>
     <setUserForm v-else @isUserSetEvent = "isUserSetfunc()"  ></setUserForm>
             </div>
         
@@ -37,7 +37,8 @@ export default {
             'users': this.$store.state.users,
             'selecteduser': null,
             'textFilter': '',
-            'isViewLogout':false
+            'isViewLogout':false,
+            'showInsertNew':false
         }
     },
     props:{

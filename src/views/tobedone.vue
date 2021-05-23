@@ -1,7 +1,7 @@
 <template>
       <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-        <todoList v-if="isUserSet" :todosFiltered="todosFiltered" @logoutEvent="logMeOut" :showCheckbox="showCheckbox" :isViewLogout="isViewLogout"></todoList>
+        <todoList v-if="isUserSet" :todosFiltered="todosFiltered" @logoutEvent="logMeOut" :showCheckbox="showCheckbox" :isViewLogout="isViewLogout" :showInsertNew="showInsertNew"></todoList>
     <setUserForm v-else @isUserSetEvent = "isUserSetfunc()"  ></setUserForm>
             </div>
         
@@ -22,7 +22,8 @@ export default {
             'todos': this.$store.state.todos,
             'isUserSet': this.$store.state.isUserSet,
             'showCheckbox': false,
-            'isViewLogout': false
+            'isViewLogout': false,
+            'showInsertNew': true
         }
     },
     props:{
