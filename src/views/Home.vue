@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <todoList v-if="isUserSet" @logoutEvent="logMeOut"></todoList>
+    <todoList v-if="isUserSet" @logoutEvent="logMeOut" :todosFiltered="todosFiltered" :showCheckbox="showCheckbox" :isViewLogout="isViewLogout"></todoList>
     <setUserForm v-else @isUserSetEvent = "isUserSetfunc()"  ></setUserForm>
 
   </div>
@@ -19,11 +19,29 @@ export default {
   },
   data(){
     return{
-      'isUserSet': this.$store.state.isUserSet
+      'isUserSet': this.$store.state.isUserSet,
+      'filerStatus' : 'all',
+      'todos' : this.$store.state.todos,
+      'showCheckbox': true,
+      'isViewLogout': true
     }
+  },
+
+  computed:{
+      todosFiltered(){
+                      if(this.filerStatus == 'all'){
+                  return this.todos
+              } else if(this.filerStatus == 'completed'){
+                  return this.todos.filter(todo => todo.isDone )
+              } else if(this.filfilerStatus =='active'){
+                  return this.todos.filter(todo => !todo.isDone)
+              }
+              return this.todos
+        },
   },
   methods:{
     isUserSetfunc(){
+        this.$store.state.isUserSet = true
         this.isUserSet = true
     },
     logMeOut(){

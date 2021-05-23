@@ -45,9 +45,11 @@ export default {
                 
                 console.log(this.username, idGenerator)
                 alert('Welcome dear new User')
-                this.$emit('isUserSetEvent')
+
                 this.$store.state.users.push({id: idGenerator, name : this.username})
                 this.$store.state.currentUser = this.isExistentUser().id
+                this.$emit('isUserSetEvent')
+
                 
             }
         }

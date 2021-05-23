@@ -1,17 +1,12 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import alltodo from '@/views/alltodos.vue'
-import completedtodo from '@/components/completedtodo.vue'
-import toBeDoneTodo from '@/components/toBeDoneTodo.vue'
+import completedtodo from '@/views/completed.vue'
+import toBeDoneTodo from '@/views/tobedone.vue'
 
 const routes = [{
     path: '/',
     name: 'Home',
     component: Home
-}, {
-    path: '/all',
-    name: 'all',
-    component: alltodo
 }, {
     path: '/completed',
     name: 'completedtodo',

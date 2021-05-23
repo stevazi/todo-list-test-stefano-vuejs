@@ -1,8 +1,7 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link>  
-    <router-link to="/all" v-if="isUserSet()">| All | </router-link> 
-    <router-link to="/completed" v-if="isUserSet()">completed | </router-link> 
+    <router-link to="/">all</router-link>  
+    <router-link to="/completed" v-if="isUserSet()"> | completed | </router-link> 
     <router-link to="/toBeDone" v-if="isUserSet()">To be Done</router-link>
 
   </div>
