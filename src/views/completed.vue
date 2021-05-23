@@ -53,8 +53,12 @@ export default {
                 var filtered = []
                 var item
                 for(item of completed){
-                    console.log(item)
-                    if(item.title.includes(this.textFilter)){
+
+
+                    var userInfo = this.users.find(userid => userid.id === item.user_id)
+
+
+                    if(item.title.includes(this.textFilter) || userInfo.name.includes(this.textFilter) ){
                         filtered.push(item)
                     }
                 }
